@@ -44,12 +44,18 @@ while True:
         for comment in comments:
             post_data = {
                 "title": post["data"]["title"],
+                "text": post["data"].get("selftext", "").replace(",", ""), # Remove commas so doesn't mess up data
+                "author": post["data"].get("author",""),
+                "upvotes": post["data"].get("score", 0),
                 "url": post["data"]["url"],
                 "date": post["data"].get("created_utc", None),
                 "date_utc": datetime.fromtimestamp(post["data"]["created_utc"], timezone.utc).strftime('%Y-%m-%d %H:%M:%S') if "created_utc" in post["data"] else None,
                 "comments": comment.replace(",", "") # Remove commas so doesn't mess up data
             }
+
             csv_data.append(post_data)
+
+
 
         time.sleep(0.5)  # Delay to avoid rate limits
 
@@ -64,7 +70,7 @@ csv_filename = "data/reddit_MoxieRobot_with_comments.csv"
 os.makedirs(os.path.dirname(csv_filename), exist_ok=True)
 
 with open(csv_filename, "w", newline="", encoding="utf-8") as f:
-    writer = csv.DictWriter(f, fieldnames=["title", "url", "date", "date_utc", "comments"])
+    writer = csv.DictWriter(f, fieldnames=["title", "text", "author", "upvotes", "url", "date", "date_utc", "comments"])
     writer.writeheader()
     writer.writerows(csv_data)
 
