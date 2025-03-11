@@ -11,10 +11,10 @@ ms_token = "D4Bi5bpwauKeZy9bbY9cwVlCRU5IdJB7il0M3lUIG3HlObaos01vBsgi0WyIqXeEPqbH
 
 async def get_comments(video_id):
     async with TikTokApi() as api:
-        await api.create_sessions(ms_tokens=[ms_token], num_sessions=1, sleep_after=3, browser=os.getenv("TIKTOK_BROWSER", "chromium"))
+        await api.create_sessions(ms_tokens=[ms_token], num_sessions=2, sleep_after=3, browser=os.getenv("TIKTOK_BROWSER", "chromium"))
         video = api.video(id=video_id)
         comments = []
-        async for comment in video.comments():
+        async for comment in video.comments(count=200):
             comments.append(comment.as_dict)
     
     return comments
