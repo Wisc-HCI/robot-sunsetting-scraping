@@ -14,7 +14,7 @@ async def get_comments(video_id):
         await api.create_sessions(ms_tokens=[ms_token], num_sessions=1, sleep_after=3, browser=os.getenv("TIKTOK_BROWSER", "chromium"))
         video = api.video(id=video_id)
         comments = []
-        async for comment in video.comments(count=200):
+        async for comment in video.comments():
             comments.append(comment.as_dict)
     
     return comments
@@ -25,13 +25,13 @@ async def get_hashtag_videos(hashtag):
     # Prep CSV file
     csv_filename = f"data/tiktok_{hashtag}.csv"
     os.makedirs(os.path.dirname(csv_filename), exist_ok=True)
-    fieldnames=["title", "author", "url", "date", "date_utc", "comment", "query_hashtag"]
+    fieldnames=["title", "author", "url", "date", "date_utc", "post_likes", "comment_count", "views", "comment", "comment_likes", "query_hashtag"]
     with open(csv_filename, "w", newline="", encoding="utf-8") as f:
         writer = csv.DictWriter(f, fieldnames=fieldnames)
         writer.writeheader()
     
     async with TikTokApi() as api:
-        await api.create_sessions(ms_tokens=[ms_token], num_sessions=1, sleep_after=3, browser='webkit')
+        await api.create_sessions(ms_tokens=[ms_token], num_sessions=2, sleep_after=3, browser='webkit')
         tag = api.hashtag(name=hashtag)
 
         async for video in tag.videos(count=200):
@@ -46,7 +46,11 @@ async def get_hashtag_videos(hashtag):
                     "url": f"https://www.tiktok.com/@{video['author']['uniqueId']}/video/{video['id']}", 
                     "date": video.get('createTime', ""), 
                     "date_utc": datetime.fromtimestamp(video['createTime']).strftime('%Y-%m-%d %H:%M:%S') if "createTime" in video else None,
-                    "comment":comment.get("text", ""),
+                    "post_likes": video.get("stats", {}).get("diggCount", 0),
+                    "comment_count": video.get("stats", {}).get("commentCount", 0),
+                    "views": video.get("stats", {}).get("playCount", 0),
+                    "comment": comment.get("text", ""),
+                    "comment_likes": comment.get("diggCount", 0),
                     "query_hashtag":hashtag,
                     
                 }
