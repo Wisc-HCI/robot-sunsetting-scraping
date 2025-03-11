@@ -50,7 +50,7 @@ async def get_hashtag_videos(hashtag):
                     "comment_count": video.get("stats", {}).get("commentCount", 0),
                     "views": video.get("stats", {}).get("playCount", 0),
                     "comment": comment.get("text", ""),
-                    "comment_likes": comment.get("diggCount", 0),
+                    "comment_likes": comment.get("digg_count", 0),
                     "query_hashtag":hashtag,
                     
                 }
