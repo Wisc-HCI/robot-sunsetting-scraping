@@ -6,12 +6,12 @@ import csv
 from datetime import datetime
 
 # This is cookie from visiting tiktok, if this doesn't work, go to tiktok and replace this
-ms_token = "D4Bi5bpwauKeZy9bbY9cwVlCRU5IdJB7il0M3lUIG3HlObaos01vBsgi0WyIqXeEPqbHu9uPxlTfSVeTQ2IKoL9m-o2otTGcyOZkXRN7Cvypc9Ial2_DPAKcs1NxSRRhwseKVdMsryNb1A=="
+ms_token = "QFCg1Xunr-1N6uoAIxz0oJc_ufbynBiexRoSpmjVQnECB1RIbfh2UaPOsPClcCPf2B-OBWmOmGLSSYkNl5W1P1Q6H9VZ51M3vLq48xHIjp6IltUWTT370ci3YM-Jky1v3I_wy4rn7QFWyA=="
 
 
 async def get_comments(video_id):
     async with TikTokApi() as api:
-        await api.create_sessions(ms_tokens=[ms_token], num_sessions=2, sleep_after=3, browser=os.getenv("TIKTOK_BROWSER", "chromium"))
+        await api.create_sessions(ms_tokens=[ms_token], num_sessions=2, sleep_after=3, browser='webkit')
         video = api.video(id=video_id)
         comments = []
         async for comment in video.comments(count=200):
