@@ -7,9 +7,9 @@ from bs4 import BeautifulSoup
 import csv
 import re
 
-# Clear file
+# Clear file and write header
 csv_file = 'data/amazon_reviews.csv'
-with open(csv_file, 'a', newline='') as f:
+with open(csv_file, 'w', newline='') as f:
     writer = csv.writer(f)
     writer.writerow(['Title', 'Rating', 'Text', 'Date', 'User', 'Upvotes', 'URL'])  # header row
 
