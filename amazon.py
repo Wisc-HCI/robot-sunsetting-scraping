@@ -3,7 +3,7 @@ This script parses all the amazon reviews of the Moxie robot from html pages
 (in the amazon pages folder) saved 2025-04-18 from
 https://www.amazon.com/Moxie-Conversational-GPT-Powered-Articulating-Emotion-Responsive/dp/B0C1M76VR9/ref=cm_cr_arp_d_product_top?ie=UTF8.
 It leaves out the 2 international reviews because they have a funky format. 
-Outputs to data/amazon_reviews.csv. Review data includes title, rating, text, date, country.
+Outputs to data/amazon_reviews.csv. Review data includes title, rating, text, date, country,
 user, upvotes, whether the review was sponsored (vine), and the url.
 """
 
