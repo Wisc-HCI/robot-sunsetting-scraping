@@ -1,7 +1,10 @@
 """
-This script  parses amazon review html pages saved 2025-04-18
-in the amazon_pages folder. It leaves out the 2 international
-reviews because they have a funky format.
+This script parses all the amazon reviews of the Moxie robot from html pages 
+(in the amazon pages folder) saved 2025-04-18 from
+https://www.amazon.com/Moxie-Conversational-GPT-Powered-Articulating-Emotion-Responsive/dp/B0C1M76VR9/ref=cm_cr_arp_d_product_top?ie=UTF8.
+It leaves out the 2 international reviews because they have a funky format. 
+Outputs to data/amazon_reviews.csv. Review data includes title, rating, text, date, country.
+user, upvotes, whether the review was sponsored (vine), and the url.
 """
 
 from bs4 import BeautifulSoup
@@ -25,7 +28,7 @@ for i in range(1, review_pages+1):
     soup = BeautifulSoup(html_content, 'html.parser')
 
     # First 2 are top reviews so skip in some instances
-    
+
     headers = soup.select(".review-title")[2:]      
     titles = [ stripped.split("\n")[1] if "\n" in stripped else stripped
         for head in headers if (stripped := head.text.strip())]

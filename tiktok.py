@@ -1,3 +1,16 @@
+"""
+Scrapes all the tiktok posts and comments from  #moxierobot and
+outputs to data/moxierobot.csv. Post data includes the  title, author, url, date, 
+like count, comment count, and view count. Comment data includes the text,  and the like count.
+
+NOTE: This script requires an "ms_token" from tiktok to run. It this script doesn't work, please
+go to tiktok, find the "ms_token" cookie value and paste it below into the "ms_token" variable.
+
+NOTE: Tiktok is pretty good at detecting bots so there is a 70% chance that this script will not
+run or will only partially run due to it being captcha'd by Tiktok.
+"""
+
+
 from TikTokApi import TikTokApi
 import asyncio
 import os
