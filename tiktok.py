@@ -1,6 +1,6 @@
 """
 Scrapes all the tiktok posts and comments from  #moxierobot and
-outputs to data/moxierobot.csv. Post data includes the  title, author, url, date, 
+outputs to data/tiktok_moxierobot.csv. Post data includes the  title, author, url, date, 
 like count, comment count, and view count. Comment data includes the text,  and the like count.
 
 NOTE: This script requires an "ms_token" from tiktok to run. It this script doesn't work, please
