@@ -21,6 +21,8 @@ Scraping for robot sunsetting data from social media
     # Windows TODO
     ```
 
+    NOTE: this often does not run due to TikTok catching bots with captchas.
+
 
 * To run the Amazon scraper:
     ```bash
